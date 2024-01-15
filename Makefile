@@ -87,7 +87,7 @@ endif
 
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -framework OpenGL -framework AppKit
-	MINILIBX_LIB := $(MINILIBX_MACOS_PATH:%=%MINILIBX_LIB$(MINILIBX_LIB))
+	MINILIBX_LIB := $(MINILIBX_MACOS_PATH:%=%$(MINILIBX_LIB))
 	MINILIBX_PATH = $(MINILIBX_MACOS_PATH)
 endif
 
@@ -166,8 +166,6 @@ $(BETTERFT_LIB): $(BETTERFT_PATH)Makefile
 
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@echo "$$LIB_HEADER"
-	echo $(MINILIBX_LINUX_PATH)
-	echo $(MINILIBX_PATH)
 	@make -C $(MINILIBX_PATH) all --no-print-directory 2>/dev/null
 
 $(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB)
