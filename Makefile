@@ -73,7 +73,23 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 MINILIBX_MACOS_PATH = libs/minilibx_opengl/
-MINILIBX_MACOS_LIB = $(MINILIBX_MACOS_PATH:%=%libmlx.a)
+MINILIBX_LINUX_PATH = libs/minilibx-linux/
+MINILIBX_LIB = libmlx.a
+MINILIBX_PATH =
+
+UNAME_S = $(shell uname -s)
+
+ifeq ($(UNAME_S),Linux)
+	CFLAGS += -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	MINILIBX_LIB := $(MINILIBX_LINUX_PATH:%=%$(MINILIBX_LIB))
+	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
+endif
+
+ifeq ($(UNAME_S),Darwin)
+	CFLAGS += -framework OpenGL -framework AppKit
+	MINILIBX_LIB := $(MINILIBX_MACOS_PATH:%=%MINILIBX_LIB$(MINILIBX_LIB))
+	MINILIBX_PATH = $(MINILIBX_MACOS_PATH)
+endif
 
 BETTERFT_PATH = libs/betterft/
 BETTERFT_LIB = $(BETTERFT_PATH:%=%betterft.a)
@@ -104,8 +120,8 @@ debug: fclean $(CFILES) $(BETTERFT_LIB)
 
 clean:
 	@$(MAKE) -C $(BETTERFT_PATH) fclean --no-print-directory
-	@$(MAKE) -C $(MINILIBX_MACOS_PATH) clean --no-print-directory 1>/dev/null
-	@echo "\t[INFO]\t[$(MINILIBX_MACOS_LIB)]\t$(MINILIBX_MACOS_LIB) is fully deleted 🗑️"
+	@$(MAKE) -C $(MINILIBX_PATH) clean --no-print-directory 1>/dev/null
+	@echo "\t[INFO]\t[$(MINILIBX_LIB)]\t$(MINILIBX_MACOS_LIB) is fully deleted 🗑️"
 
 fclean: clean
 	@rm -f $(NAME)
@@ -137,10 +153,10 @@ $(BONUS_CFILES): header
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@printf "\33[2K"
 
-$(NAME): $(CFILES) $(BETTERFT_LIB) $(MINILIBX_MACOS_LIB)
+$(NAME): $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	@$(CC) $(CFLAGS) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_MACOS_LIB) -framework OpenGL -framework AppKit -o $(NAME)
+	@$(CC) $(CFLAGS) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅\n"
 
@@ -148,9 +164,11 @@ $(BETTERFT_LIB): $(BETTERFT_PATH)Makefile
 	@echo "$$LIB_HEADER"
 	@make -C $(BETTERFT_PATH) all --no-print-directory
 
-$(MINILIBX_MACOS_LIB): $(MINILIBX_MACOS_PATH)Makefile
+$(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@echo "$$LIB_HEADER"
-	@make -C $(MINILIBX_MACOS_PATH) all --no-print-directory 2>/dev/null
+	echo $(MINILIBX_LINUX_PATH)
+	echo $(MINILIBX_PATH)
+	@make -C $(MINILIBX_PATH) all --no-print-directory 2>/dev/null
 
 $(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB)
 	@echo "$$BONUS_HEADER"
