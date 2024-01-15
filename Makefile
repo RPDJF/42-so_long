@@ -81,15 +81,15 @@ UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
-	MINILIBX_LIB := $(MINILIBX_LINUX_PATH:%=%$(MINILIBX_LIB))
 	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
 endif
 
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -framework OpenGL -framework AppKit
-	MINILIBX_LIB := $(MINILIBX_MACOS_PATH:%=%$(MINILIBX_LIB))
 	MINILIBX_PATH = $(MINILIBX_MACOS_PATH)
 endif
+
+MINILIBX_LIB := $(MINILIBX_PATH:%=%$(MINILIBX_LIB))
 
 BETTERFT_PATH = libs/betterft/
 BETTERFT_LIB = $(BETTERFT_PATH:%=%betterft.a)
@@ -109,7 +109,7 @@ BONUS_NAME = so_long_bonus
 
 all: $(NAME)
 
-debug: fclean $(CFILES) $(BETTERFT_LIB)
+debug: fclean $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
 	@$(CC) $(CFLAGS) -g3 -fsanitize=address $(CFILES) $(BETTERFT_LIB) -o $(NAME)
@@ -118,10 +118,10 @@ debug: fclean $(CFILES) $(BETTERFT_LIB)
 	@echo "\nThe programm was compiled with debug sanitizer set to address\nDo not forget to use \"leak -atExit -- $(NAME)\" in order to check for potential leaks.\nNote that it won't work with the debug version.\n\nFor better debug, you can use \"lldb $(name) <args>\" after using debug rule.\n\n"
 	@echo $(shell norminette)
 
-clean:
+clean: $(BETTERFT_PATH)Makefile $(MINILIBX_PATH)Makefile
 	@$(MAKE) -C $(BETTERFT_PATH) fclean --no-print-directory
 	@$(MAKE) -C $(MINILIBX_PATH) clean --no-print-directory 1>/dev/null
-	@echo "\t[INFO]\t[$(MINILIBX_LIB)]\t$(MINILIBX_MACOS_LIB) is fully deleted 🗑️"
+	@echo "\t[INFO]\t[$(MINILIBX_LIB)]\t$(MINILIBX_LIB) is fully deleted 🗑️"
 
 fclean: clean
 	@rm -f $(NAME)
@@ -166,7 +166,9 @@ $(BETTERFT_LIB): $(BETTERFT_PATH)Makefile
 
 $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@echo "$$LIB_HEADER"
-	@make -C $(MINILIBX_PATH) all --no-print-directory 2>/dev/null
+	@echo "\t🤖 Compiling $(MINILIBX_LIB)..."
+	@make -C $(MINILIBX_PATH) all --no-print-directory 1>/dev/null
+	@echo "\t[INFO]\t[$(MINILIBX_LIB)]\t$(MINILIBX_LIB) is compiled ✅\n"
 
 $(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB)
 	@echo "$$BONUS_HEADER"
