@@ -159,8 +159,6 @@ $(BONUS_CFILES): header
 $(NAME): $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	echo $(MINILIBX_LIB)
-	echo $(CFLAGS)
 	@$(CC) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅\n"
