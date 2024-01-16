@@ -6,13 +6,13 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:46:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 04:01:46 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 04:34:44 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long so_long)
+t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long *so_long)
 {
 	t_entity	*entity;
 
@@ -26,7 +26,7 @@ t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long so_long)
 	return (entity);
 }
 
-static t_xpm	*fetch_frames(char *base_filename, int nb_frames, t_so_long so_long)
+static t_xpm	*fetch_frames(char *base_filename, int nb_frames, t_so_long *so_long)
 {
 	t_xpm	*frames;
 	char	*filename;
@@ -45,13 +45,13 @@ static t_xpm	*fetch_frames(char *base_filename, int nb_frames, t_so_long so_long
 		filename = ft_strreplace(base_filename, "{id}", tmp);
 		if (!filename)
 			error_exit(so_long);
-		frames[i].img = mlx_xpm_file_to_image(so_long.mlx, filename,
+		frames[i].img = mlx_xpm_file_to_image(so_long->mlx, filename,
 				&(frames->width), &(frames->height));
 	}
 	return (frames);
 }
 
-t_anim	new_anim(char *entity, char *anim_name, int nb_frames, t_so_long so_long)
+t_anim	new_anim(char *entity, char *anim_name, int nb_frames, t_so_long *so_long)
 {
 	t_anim	anim;
 	char	*xpm_filename;

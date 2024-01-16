@@ -6,13 +6,13 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:49:48 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 04:01:25 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 04:34:55 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-t_entity	*new_player(t_pos pos, t_so_long so_long)
+t_entity	*new_player(t_pos pos, t_so_long *so_long)
 {
 	t_entity	*player;
 	t_anim		*anims;

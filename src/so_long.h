@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 04:00:56 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 04:34:33 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,23 @@ typedef struct	s_entity
 //		models of pre-existent entities
 
 //		new_player: creates a new player
-t_entity	*new_player(t_pos pos, t_so_long so_long);
+t_entity	*new_player(t_pos pos, t_so_long *so_long);
 
 //	FROM FILE utils/entity_builder.c
 //		entity building utilities
 
 //		new_entity:	creates a new entity
-t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long so_long);
+t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long *so_long);
 //		new_anim:	creates new animation sets
-t_anim		new_anim(char *entity, char *anim_name, int nb_frames, t_so_long so_long);
+t_anim		new_anim(char *entity, char *anim_name, int nb_frames, t_so_long *so_long);
 
 //	FROM FILE utils/exit_handler.c
 //		handles secure exits
 
 //		secure_exit:	simple exit with code 0, frees garbage collector and closes window
-int			secure_exit(t_so_long so_long);
+int			secure_exit(void *param);
 //		error_exit:	simple exit with code 1, frees garbage collector and closes window
-int			error_exit(t_so_long so_long);
+int			error_exit(void *param);
 
 
 #endif
