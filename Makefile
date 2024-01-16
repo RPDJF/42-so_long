@@ -95,6 +95,9 @@ BETTERFT_PATH = libs/betterft/
 BETTERFT_LIB = $(BETTERFT_PATH:%=%betterft.a)
 
 SRC = 	so_long \
+		utils/entities \
+		utils/entity_builder \
+		utils/exit_handler \
 
 
 CFILES = $(SRC:%=src/%.c)
@@ -112,7 +115,7 @@ all: $(NAME)
 debug: fclean $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	@$(CC) $(CFLAGS) -g3 -fsanitize=address $(CFILES) $(BETTERFT_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) -g3 -fsanitize=address $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅"
 	@echo "\nThe programm was compiled with debug sanitizer set to address\nDo not forget to use \"leak -atExit -- $(NAME)\" in order to check for potential leaks.\nNote that it won't work with the debug version.\n\nFor better debug, you can use \"lldb $(name) <args>\" after using debug rule.\n\n"
@@ -156,7 +159,7 @@ $(BONUS_CFILES): header
 $(NAME): $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	@$(CC) $(CFLAGS) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅\n"
 
