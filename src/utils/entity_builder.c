@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:46:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 03:30:20 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 03:34:38 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ t_anim	new_anim(char *entity, char *anim_name, int nb_frames, void *mlx)
 	char	*xpm_filename;
 
 	anim.nb_frames = nb_frames;
-	anim.name = ft_strdup(sprite_name);
+	anim.name = ft_strdup(entity);
 	if (!anim.name)
 		secure_exit(1);
-	xpm_filename = ft_strjoin(SPRITES_DIR, sprite_name);
+	xpm_filename = ft_strjoin(SPRITES_DIR, entity);
 	if (!xpm_filename)
 		secure_exit(1);
 	xpm_filename = ft_strjoin(xpm_filename, "/");
