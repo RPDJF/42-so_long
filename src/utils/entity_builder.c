@@ -6,16 +6,17 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:46:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 01:16:09 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 03:30:20 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-t_entity    *new_entity(char *name, t_pos pos, t_anim *anims)
+t_entity	*new_entity(char *name, t_pos pos, t_anim *anims)
 {
-	t_entity *entity;
-	entity = galloc(sizeof(entity));
+	t_entity	*entity;
+
+	entity = galloc(sizeof(t_entity));
 	if (!entity)
 		secure_exit(1);
 	entity->name = name;
@@ -44,12 +45,13 @@ static t_xpm	*fetch_frames(char *base_filename, int nb_frames, void *mlx)
 		filename = ft_strreplace(base_filename, "{id}", tmp);
 		if (!filename)
 			secure_exit(1);
-		frames[i].img = mlx_xpm_file_to_image(mlx, filename, &(frames->width), &(frames->height));
+		frames[i].img = mlx_xpm_file_to_image(mlx, filename,
+				&(frames->width), &(frames->height));
 	}
 	return (frames);
 }
 
-t_anim	new_animation(char *sprite_name, char *anim_name, int nb_frames, void *mlx)
+t_anim	new_anim(char *entity, char *anim_name, int nb_frames, void *mlx)
 {
 	t_anim	anim;
 	char	*xpm_filename;

@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 01:21:25 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 03:28:15 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libs/minilibx-linux/mlx.h"
 # include <stdbool.h>
 
-# define SPRITES_DIR "../sprites/"
+# define SPRITES_DIR "sprites/"
 
 typedef struct	s_data
 {
@@ -48,7 +48,6 @@ typedef struct	s_anim
 	t_xpm	*frames;
 }					t_anim;
 
-//	For characters entities, we assume that anim 0 = right, 1 = left, 2 = up, 3 = down
 typedef struct	s_entity
 {
 	char	*name;
@@ -57,24 +56,22 @@ typedef struct	s_entity
 	int		nb_anims;
 	t_anim	current_anim;
 	bool	anim_active;
-	int		current_frame;
+	t_xpm	current_frame;
 }					t_entity;
 
 //	FROM FILE utils/entities.c
 //		models of pre-existent entities
 
 //		new_player: creates a new player
-t_entity 	*new_player(t_pos pos, void *mlx);
-
+t_entity	*new_player(t_pos pos, void *mlx);
 
 //	FROM FILE utils/entity_builder.c
 //		entity building utilities
 
 //		new_entity:	creates a new entity
 t_entity	*new_entity(char *name, t_pos pos, t_anim *anims);
-//		new_animation:	creates new animation sets
-t_anim		new_animation(char *sprite_name, char *anim_name, int nb_frames, void *mlx);
-
+//		new_anim:	creates new animation sets
+t_anim		new_anim(char *entity, char *anim_name, int nb_frames, void *mlx);
 
 //	FROM FILE utils/exit_handler.c
 //		handles secure exits

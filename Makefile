@@ -80,7 +80,7 @@ MINILIBX_PATH =
 UNAME_S = $(shell uname -s)
 
 ifeq ($(UNAME_S),Linux)
-	CFLAGS += -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	CFLAGS += -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
 endif
 
@@ -115,7 +115,7 @@ all: $(NAME)
 debug: fclean $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	@$(CC) $(CFLAGS) -g3 -fsanitize=address $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) -o $(NAME)
+	@$(CC) -g3 -fsanitize=address $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅"
 	@echo "\nThe programm was compiled with debug sanitizer set to address\nDo not forget to use \"leak -atExit -- $(NAME)\" in order to check for potential leaks.\nNote that it won't work with the debug version.\n\nFor better debug, you can use \"lldb $(name) <args>\" after using debug rule.\n\n"
@@ -159,7 +159,9 @@ $(BONUS_CFILES): header
 $(NAME): $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$APP_HEADER"
 	@printf "\t🤖 Compiling $(NAME)...\r"
-	@$(CC) $(CFLAGS) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) -o $(NAME)
+	echo $(MINILIBX_LIB)
+	echo $(CFLAGS)
+	@$(CC) $(CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(NAME)]\t$(NAME) is compiled ✅\n"
 
