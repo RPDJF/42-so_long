@@ -6,7 +6,7 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 03:12:19 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 04:06:39 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,22 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	main(void)
 {
-	void		*mlx;
-	void		*mlx_win;
+	t_so_long	so_long;
 	t_pos		pos;
 	t_entity	*player;
 
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 640, 480, "so_long");
+	so_long.mlx = mlx_init();
+	so_long.win = mlx_new_window(so_long.mlx, 640, 480, "so_long");
+	mlx_hook(so_long.win, 17, 0, secure_exit, &so_long);
 	pos.x = 20;
 	pos.y = 40;
-	player = new_player(pos, mlx);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[0].frames[0].img, player->pos.x, player->pos.y);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[0].frames[1].img, player->pos.x + 30, player->pos.y);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[0].frames[2].img, player->pos.x + 60, player->pos.y);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[1].frames[0].img, player->pos.x, player->pos.y + 30);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[1].frames[1].img, player->pos.x + 30, player->pos.y + 30);
-	mlx_put_image_to_window(mlx, mlx_win, player->anims[1].frames[2].img, player->pos.x + 60, player->pos.y + 30);
-	mlx_loop(mlx);
-	secure_exit(0);
+	player = new_player(pos, so_long);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[0].img, player->pos.x, player->pos.y);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[1].img, player->pos.x + 30, player->pos.y);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[2].img, player->pos.x + 60, player->pos.y);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[0].img, player->pos.x, player->pos.y + 30);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[1].img, player->pos.x + 30, player->pos.y + 30);
+	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[2].img, player->pos.x + 60, player->pos.y + 30);
+	mlx_loop(so_long.mlx);
+	return (0);
 }

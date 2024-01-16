@@ -6,14 +6,24 @@
 /*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 01:16:19 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/16 04:11:13 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	secure_exit(int code)
+int	secure_exit(t_so_long so_long)
 {
 	cleargarbage();
-	exit(code);
+	mlx_destroy_window(so_long.mlx, so_long.win);
+	exit(0);
+	return (0);
+}
+
+int	error_exit(t_so_long so_long)
+{
+	cleargarbage();
+	mlx_destroy_window(so_long.mlx, so_long.win);
+	exit(1);
+	return (0);
 }
