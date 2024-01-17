@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 04:30:49 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/17 18:59:29 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	secure_exit(void *param)
 	so_long = (t_so_long *)param;
 	cleargarbage();
 	mlx_destroy_window(so_long->mlx, so_long->win);
+	mlx_destroy_display(so_long->mlx);
+	free(so_long->mlx);
 	exit(0);
 	return (0);
 }

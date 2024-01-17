@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/16 04:34:33 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/17 19:36:12 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <stdbool.h>
 
 # define SPRITES_DIR "sprites/"
-
-typedef struct	s_so_long
-{
-	void	*mlx;
-	void	*win;
-}					t_so_long;
 
 typedef struct	s_data
 {
@@ -65,6 +59,22 @@ typedef struct	s_entity
 	t_xpm	current_frame;
 }					t_entity;
 
+typedef struct	s_map
+{
+	char	**data;
+	t_pos	start;
+	t_pos	end;
+	int		height;
+	int		width;
+}				t_map;
+
+typedef struct	s_so_long
+{
+	void	*mlx;
+	void	*win;
+	t_map	*map;
+}					t_so_long;
+
 //	FROM FILE utils/entities.c
 //		models of pre-existent entities
 
@@ -87,5 +97,14 @@ int			secure_exit(void *param);
 //		error_exit:	simple exit with code 1, frees garbage collector and closes window
 int			error_exit(void *param);
 
+//	FROM FILE utils/map_parser.c
+
+//		load_map:	load mapfile as char 2D array, returns 0 on map error
+t_map		*get_map(t_so_long *so_long, char *filename);
+
+//	FROM FILE utils/path_checker.c
+
+//		check_path:	Check if path is possible between 2 t_pos positions
+int			check_path(t_so_long *so_long, t_map *map, t_pos pos1, t_pos pos2);
 
 #endif

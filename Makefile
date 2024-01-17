@@ -98,6 +98,8 @@ SRC = 	so_long \
 		utils/entities \
 		utils/entity_builder \
 		utils/exit_handler \
+		utils/map_parser \
+		utils/path_checker \
 
 
 CFILES = $(SRC:%=src/%.c)
