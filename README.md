@@ -14,6 +14,23 @@ So_Long is an enthralling project that immerses you in the world of 2D gaming. I
 
 ## Compile-it! 💻
 
+Before compiling, check that you have the necessary components :
+### For linux
+```bash
+sudo apt-get update && sudo apt-get install xorg libxext-dev zlib1g-dev libbsd-dev
+```
+
+### For WSL2 (Win11)
+same as linux
+
+if not working :
+```powershell
+wsl --update
+```
+
+### For MacOS
+You may need ton install libmlx.dylib (refer to https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html#compilation-on-macos)
+
 Summon your So_Long masterpiece with these magic commands:
 
 - `make`: Conjure a regular enchantment. Compile that code, and you're ready for an epic gaming adventure!
