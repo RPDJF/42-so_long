@@ -12,6 +12,14 @@ Greetings, fellow adventurers! Welcome to the realm of So_Long, a captivating pr
 
 So_Long is an enthralling project that immerses you in the world of 2D gaming. It's like casting spells in the realm of game development, mastering the arcane arts of graphics and interactivity! 🧙‍♂️
 
+## Play it! 🎮
+
+First, you have to compile-it ! (see below)
+In order so play so_long, you then need to load one of the maps in ./maps folder
+```bash
+./so_long maps/pacman.ber
+```
+
 ## Compile-it! 💻
 
 Before compiling, check that you have the necessary components :
