@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 01:29:42 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 03:13:44 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,19 @@
 # define UP 2
 # define DOWN 3
 
+// macros
 # define GRID 19
 # define SPRITES_DIR "sprites/"
 # define TEXTURES_DIR "textures/"
+
+// messages
+# define NB_MOVES "number of movements"
+
+// err messages
+# define ERR_MAP "MAP ERROR"
+# define ERR_MAP_FORMAT "MAP ERROR: Map is not using the correct format \"01PCE\""
+# define ERR_MAP_SHAPE "MAP ERROR: Map has an invalid shape"
+# define ERR_MAP_IMPOSSIBLE "MAP ERROR: Map is impossible"
 
 typedef struct s_data
 {
@@ -78,22 +88,20 @@ typedef struct s_entity
 typedef struct s_map
 {
 	char	**data;
+	int		score_remain;
 	t_pos	start;
 	t_pos	end;
 	int		height;
 	int		width;
+	t_xpm	wall;
+	t_xpm	path;
+	t_xpm	score;
 }			t_map;
-
-typedef struct s_texture
-{
-	void	*img;
-	int		height;
-	int		width;
-}			t_texture;
 
 typedef struct s_so_long
 {
 	int			score;
+	int			moves;
 	void		*mlx;
 	void		*win;
 	t_map		*map;

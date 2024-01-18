@@ -6,12 +6,13 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:09:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 00:11:26 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 03:38:29 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 static void	reset_map(t_map *map)
 {
@@ -74,17 +75,52 @@ static char	**load_map(char *filename)
 	return (map);
 }
 
+static void	load_map_textures(t_so_long *so_long, t_map *map)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(TEXTURES_DIR, "wall.xpm");
+	if (!tmp)
+		error_exit(so_long);
+	map->wall.img = mlx_xpm_file_to_image(so_long->mlx, tmp,
+			&map->wall.width, &map->wall.height);
+	gfree(tmp);
+	tmp = ft_strjoin(TEXTURES_DIR, "path.xpm");
+	if (!tmp)
+		error_exit(so_long);
+	map->path.img = mlx_xpm_file_to_image(so_long->mlx, tmp,
+			&map->path.width, &map->path.height);
+	gfree(tmp);
+	tmp = ft_strjoin(TEXTURES_DIR, "score.xpm");
+	if (!tmp)
+		error_exit(so_long);
+	map->score.img = mlx_xpm_file_to_image(so_long->mlx, tmp,
+			&map->score.width, &map->score.height);
+	gfree(tmp);
+}
+
 t_map	*get_map(t_so_long *so_long, char *filename)
 {
 	t_map	*map;
+	int		status;
 
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (0);
 	map->data = load_map(filename);
-	if (!map)
+	status = map_checker(so_long, map);
+	if (status < 0)
+	{
+		if (!map->data)
+			perror(ERR_MAP);
+		else if (status == -1)
+			ft_putendl_fd(ERR_MAP_FORMAT, 2);
+		else if (status == -2)
+			ft_putendl_fd(ERR_MAP_SHAPE, 2);
+		else if (status == -3)
+			ft_putendl_fd(ERR_MAP_IMPOSSIBLE, 2);
 		return (0);
-	if (map_checker(so_long, map) < 0)
-		return (0);
+	}
+	load_map_textures(so_long, map);
 	return (map);
 }

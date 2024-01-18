@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 00:55:01 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 03:24:26 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,24 @@ void	put_image(t_so_long *so_long, void *img, t_pos pos)
 void	render_map(t_so_long *so_long)
 {
 	t_pos	pos;
-	char	**map;
+	t_map	*map;
+	char	**data;
 
-	map = so_long->map->data;
-	static t_texture	wall;
-	static t_texture	path;
-	static t_texture	score;
-	if (!wall.img)
-		wall.img = mlx_xpm_file_to_image(so_long->mlx, ft_strjoin(TEXTURES_DIR, "wall.xpm"), &wall.width, &wall.height);
-	if (!path.img)
-		path.img = mlx_xpm_file_to_image(so_long->mlx, ft_strjoin(TEXTURES_DIR, "path.xpm"), &path.width, &score.height);
-	if (!score.img)
-		score.img = mlx_xpm_file_to_image(so_long->mlx, ft_strjoin(TEXTURES_DIR, "score.xpm"), &score.width, &score.height);
+	map = so_long->map;
+	data = map->data;
 	pos.y = -1;
-	while (pos.y++, map[pos.y])
+	while (pos.y++, data[pos.y])
 	{
 		pos.x = -1;
-		while (pos.x++, map[pos.y][pos.x])
+		while (pos.x++, data[pos.y][pos.x])
 		{
-			if (map[pos.y][pos.x] == '1')
-				put_image(so_long, wall.img, pos);
-			else if (map[pos.y][pos.x] == '0'
-				|| map[pos.y][pos.x] == 'P' || map[pos.y][pos.x] == 'E')
-				put_image(so_long, path.img, pos);
-			else if (map[pos.y][pos.x] == 'C')
-				put_image(so_long, score.img, pos);
+			if (data[pos.y][pos.x] == '1')
+				put_image(so_long, map->wall.img, pos);
+			else if (data[pos.y][pos.x] == '0'
+				|| data[pos.y][pos.x] == 'P' || data[pos.y][pos.x] == 'E')
+				put_image(so_long, map->path.img, pos);
+			else if (data[pos.y][pos.x] == 'C')
+				put_image(so_long, map->score.img, pos);
 		}
 	}
 }
