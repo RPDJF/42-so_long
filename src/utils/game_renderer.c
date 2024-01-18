@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 15:31:42 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:00:49 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,14 @@ void	render_entities(t_so_long *so_long)
 	player = so_long->player;
 	put_image(so_long,
 		player->current_anim.frames[player->current_frame].img, player->pos);
+}
+
+int	render_all(void *param)
+{
+	t_so_long	*so_long;
+
+	so_long = (t_so_long *)param;
+	render_map(so_long);
+	render_entities(so_long);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 15:44:54 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:00:52 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int			crash_exit(void *param);
 void		render_map(t_so_long *so_long);
 //		render_entities:	Draws all of the entities, including player
 void		render_entities(t_so_long *so_long);
+//		render_entities:	Render map & entities, including player
+int			render_all(void *param);
 
 //	FROM FILE utils/map_checker_utils.c
 

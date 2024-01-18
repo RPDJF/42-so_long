@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 15:37:07 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:18:08 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ int	key_press(int keycode, void *param)
 	if (keycode == 65364 || keycode == 115
 		|| keycode == 1 || keycode == 125)
 		movement_handler(so_long, DOWN);
-	render_map(so_long);
-	render_entities(so_long);
+	render_all(so_long);
 	return (0);
 }
 
@@ -110,7 +109,7 @@ int	main(int argc, char **argv)
 	render_map(&so_long);
 	render_entities(&so_long);
 	mlx_hook(so_long.win, 17, 0, secure_exit, &so_long);
-	mlx_hook(so_long.win, 25, 0, secure_exit, &so_long);
+	mlx_expose_hook(so_long.win, render_all, &so_long);
 	mlx_hook(so_long.win, 2, 1L << 0, key_press, &so_long);
 	mlx_loop(so_long.mlx);
 	return (0);
