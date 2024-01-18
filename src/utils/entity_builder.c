@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:46:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 13:43:56 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:24:27 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ static t_xpm	*fetch_frames(char *base_filename, int nb_frames, t_so_long *sl)
 		if (!tmp)
 			crash_exit(sl);
 		filename = ft_strreplace(base_filename, "{id}", tmp);
-		gfree(tmp);
 		if (!filename)
 			crash_exit(sl);
 		frames[i].img = mlx_xpm_file_to_image(sl->mlx, filename,
 				&(frames->width), &(frames->height));
 		gfree(filename);
+		gfree(tmp);
 	}
 	return (frames);
 }
