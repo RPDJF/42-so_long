@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 01:00:14 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:29:42 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 # define SO_LONG_H
 
 # include "../libs/betterft/betterft.h"
-# include "../libs/minilibx-linux/mlx.h"
 # include <stdbool.h>
+
+// compatibility checker
+# ifdef __APPLE__
+#  include "../libs/minilibx_opengl/mlx.h"
+# endif
+
+# ifndef __APPLE__
+#  include "../libs/minilibx-linux/mlx.h"
+# endif
 
 // directions
 # define LEFT 0
