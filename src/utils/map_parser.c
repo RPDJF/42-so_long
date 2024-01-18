@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:09:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 13:46:49 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:59:28 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ t_map	*get_map(t_so_long *so_long, char *filename)
 			ft_putendl_fd(ERR_MAP_SHAPE, 2);
 		else if (status == -3)
 			ft_putendl_fd(ERR_MAP_IMPOSSIBLE, 2);
-		return (0);
+		error_exit(so_long);
 	}
 	load_map_textures(so_long, map);
 	return (map);
