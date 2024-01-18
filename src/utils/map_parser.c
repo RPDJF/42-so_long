@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:09:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 14:47:34 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:43:25 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,11 @@ static void	load_map_textures(t_so_long *so_long, t_map *map)
 	map->score.img = mlx_xpm_file_to_image(so_long->mlx, tmp,
 			&map->score.width, &map->score.height);
 	gfree(tmp);
+	tmp = ft_strjoin(TEXTURES_DIR, "exit.xpm");
+	if (!tmp)
+		crash_exit(so_long);
+	map->exit.img = mlx_xpm_file_to_image(so_long->mlx, tmp,
+			&map->exit.width, &map->exit.height);
 }
 
 t_map	*get_map(t_so_long *so_long, char *filename)
@@ -104,6 +109,7 @@ t_map	*get_map(t_so_long *so_long, char *filename)
 	t_map	*map;
 	int		status;
 
+	check_map_name(filename);
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (0);

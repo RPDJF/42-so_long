@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 14:44:15 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:24:13 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static int	map_check_elements(t_map *map)
 	}
 	if (spawn != 1 || exit != 1 || score < 1)
 		return (-1);
-	return (0);
+	return (score);
 }
 
 int	map_checker(t_so_long *so_long, t_map *map)
@@ -108,7 +108,8 @@ int	map_checker(t_so_long *so_long, t_map *map)
 		return (-1);
 	else if (map_shape_checker(map) < 0)
 		return (-2);
-	else if (map_check_elements(map) < 0)
+	so_long->collectibles = map_check_elements(map);
+	if (so_long->collectibles < 0)
 		return (-3);
 	init_map(map);
 	if (map_tester(so_long, map) < 0)

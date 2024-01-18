@@ -102,6 +102,7 @@ SRC = 	so_long \
 		utils/entity_builder \
 		utils/exit_handler_$(OS) \
 		utils/game_renderer \
+		utils/map_checker_utils \
 		utils/map_checker \
 		utils/map_parser \
 		utils/path_checker \

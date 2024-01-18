@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 14:48:09 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:44:54 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@
 # define NB_MOVES "number of movements"
 
 // err messages
-# define ERR_MAP "MAP ERROR"
-# define ERR_MAP_FORMAT "MAP ERROR: Map is not using the correct format \"01PCE\""
-# define ERR_MAP_SHAPE "MAP ERROR: Map has an invalid shape"
-# define ERR_MAP_ELEMENTS "MAP ERROR: Map elements must to contain 1 Player, \
+# define ERR_MAP "Error\n"
+# define ERR_MAP_FORMAT "Error\nMap is not using the correct format \"01PCE\""
+# define ERR_MAP_SHAPE "Error\nMap has an invalid shape"
+# define ERR_MAP_ELEMENTS "Error\nMap elements must to contain 1 Player, \
 1 Exit and at least 1 Collectible"
-# define ERR_MAP_IMPOSSIBLE "MAP ERROR: Map is impossible"
+# define ERR_MAP_IMPOSSIBLE "Error\nMap is impossible"
+# define ERR_MAP_EXTENSION "Error\nthe map have not .ber extension"
 
 typedef struct s_data
 {
@@ -98,11 +99,13 @@ typedef struct s_map
 	t_xpm	wall;
 	t_xpm	path;
 	t_xpm	score;
+	t_xpm	exit;
 }			t_map;
 
 typedef struct s_so_long
 {
 	int			score;
+	int			collectibles;
 	int			moves;
 	void		*mlx;
 	void		*win;
@@ -141,6 +144,11 @@ int			crash_exit(void *param);
 void		render_map(t_so_long *so_long);
 //		render_entities:	Draws all of the entities, including player
 void		render_entities(t_so_long *so_long);
+
+//	FROM FILE utils/map_checker_utils.c
+
+//		check_map_name:	tests name of the map, exit on wrong filename
+void		check_map_name(char *filename);
 
 //	FROM FILE utils/map_checker.c
 

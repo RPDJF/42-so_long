@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 13:58:43 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 15:37:07 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
+}
+
+void	check_events(t_so_long *so_long)
+{
+	t_entity	*player;
+	char		**map;
+	char		event;
+
+	player = so_long->player;
+	map = so_long->map->data;
+	event = map[player->pos.y][player->pos.x];
+	if (event == 'C')
+	{
+		so_long->collectibles--;
+		map[player->pos.y][player->pos.x] = '0';
+		so_long->score++;
+	}
+	else if (event == 'E' && !so_long->collectibles)
+	{
+		ft_printf("You win !\n");
+		secure_exit(so_long);
+	}
 }
 
 void	movement_handler(t_so_long *so_long, int direction)
@@ -37,15 +59,12 @@ void	movement_handler(t_so_long *so_long, int direction)
 		player->pos.y--;
 	else if (direction == 3 && map[player->pos.y + 1][player->pos.x] != '1')
 		player->pos.y++;
-	if (map[player->pos.y][player->pos.x] == 'C')
-		map[player->pos.y][player->pos.x] = '0';
-	if (map[player->pos.y][player->pos.x] == 'C')
-		so_long->score++;
 	if (delta != player->pos.x + player->pos.y)
 		ft_printf("%s:\t%d\n", NB_MOVES, ++so_long->moves);
 	player->current_anim = player->anims[direction];
 	player->current_frame++;
 	player->current_frame %= player->current_anim.nb_frames;
+	check_events(so_long);
 }
 
 int	key_press(int keycode, void *param)
