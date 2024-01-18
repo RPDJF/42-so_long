@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/19 00:19:40 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/19 00:42:32 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,16 @@ static t_so_long	*new_so_long(char *filename)
 void	*move_player(void *arg)
 {
 	t_so_long	*so_long;
+	void		*mlx;
 
 	so_long = (t_so_long *)arg;
+	mlx = so_long->mlx;
 	while (true)
 	{
 		usleep(200000);
 		movement_handler(so_long);
 		render_all(so_long);
+		mlx_do_sync(mlx);
 	}
 	pthread_exit(NULL);
 }
@@ -140,9 +143,9 @@ int	main(int argc, char **argv)
 	render_all(so_long);
 	if (pthread_create(&so_long->ticks, 0, move_player, (void *)so_long) != 0)
 		crash_exit(so_long);
+	mlx_hook(so_long->win, 2, 1L << 0, key_press, so_long);
 	mlx_hook(so_long->win, 17, 0, secure_exit, so_long);
 	mlx_expose_hook(so_long->win, render_all, so_long);
-	mlx_hook(so_long->win, 2, 1L << 0, key_press, so_long);
 	mlx_loop(so_long->mlx);
 	return (0);
 }
