@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/17 19:37:16 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:04:53 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,69 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	key_press(int keycode, void *so_long)
+void	movement_handler(t_so_long *so_long, int direction)
 {
-	if (keycode == 53)
-		secure_exit(so_long);
-	return (0);
+	t_entity	*player;
+	char		**map;
+
+	player = so_long->player;
+	map = so_long->map->data;
+	if (direction == 0 && map[player->pos.y][player->pos.x - 1] != '1')
+		player->pos.x--;
+	else if (direction == 1 && map[player->pos.y][player->pos.x + 1] != '1')
+		player->pos.x++;
+	else if (direction == 2 && map[player->pos.y - 1][player->pos.x] != '1')
+		player->pos.y--;
+	else if (direction == 3 && map[player->pos.y + 1][player->pos.x] != '1')
+		player->pos.y++;
+	if (map[player->pos.y][player->pos.x] == 'C')
+	{
+		map[player->pos.y][player->pos.x] = '0';
+		so_long->score++;
+	}
+	player->current_anim = player->anims[direction];
+	player->current_frame++;
+	player->current_frame %= player->current_anim.nb_frames;
 }
 
+int	key_press(int keycode, void *param)
+{
+	t_so_long	*so_long;
+
+	so_long = (t_so_long *)param;
+	ft_printf("%d\n", keycode);
+	if (keycode == 53 || keycode == 65307)
+		secure_exit(so_long);
+	if (keycode == 65361 || keycode == 97)
+		movement_handler(so_long, LEFT);
+	if (keycode == 65363 || keycode == 100)
+		movement_handler(so_long, RIGHT);
+	if (keycode == 65362 || keycode == 119)
+		movement_handler(so_long, UP);
+	if (keycode == 65364 || keycode == 115)
+		movement_handler(so_long, DOWN);
+	render_map(so_long);
+	render_entities(so_long);
+	return (0);
+}
 
 int	main(int argc, char **argv)
 {
 	t_so_long	so_long;
-	t_pos		pos;
 	t_entity	*player;
 
-	(void)argc;	// need to check arguments
-	so_long.map = get_map(&so_long, argv[1]); // need to print error
+	if (argc != 2)
+		return (1);
+	so_long.map = get_map(&so_long, argv[1]);
+	so_long.score = 0;
 	so_long.mlx = mlx_init();
-	so_long.win = mlx_new_window(so_long.mlx, 640, 480, "so_long");
-	pos.x = 20;
-	pos.y = 40;
-	player = new_player(pos, &so_long);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[0].img, player->pos.x, player->pos.y);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[1].img, player->pos.x + 30, player->pos.y);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[0].frames[2].img, player->pos.x + 60, player->pos.y);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[0].img, player->pos.x, player->pos.y + 30);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[1].img, player->pos.x + 30, player->pos.y + 30);
-	mlx_put_image_to_window(so_long.mlx, so_long.win, player->anims[1].frames[2].img, player->pos.x + 60, player->pos.y + 30);
+	so_long.win = mlx_new_window(so_long.mlx, so_long.map->width * GRID, so_long.map->height * GRID, "so_long");
+	player = new_player(so_long.map->start, &so_long);
+	so_long.player = player;
+	render_map(&so_long);
+	render_entities(&so_long);
 	mlx_hook(so_long.win, 17, 0, secure_exit, &so_long);
-	mlx_hook(so_long.win, 2, 0, key_press, &so_long);
+	mlx_hook(so_long.win, 2, 1L << 0, key_press, &so_long);
 	mlx_loop(so_long.mlx);
 	return (0);
 }

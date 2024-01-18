@@ -98,6 +98,8 @@ SRC = 	so_long \
 		utils/entities \
 		utils/entity_builder \
 		utils/exit_handler \
+		utils/game_renderer \
+		utils/map_checker \
 		utils/map_parser \
 		utils/path_checker \
 

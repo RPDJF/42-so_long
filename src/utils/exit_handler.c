@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/17 18:59:29 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:05:36 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	error_exit(void *param)
 	so_long = (t_so_long *)param;
 	cleargarbage();
 	mlx_destroy_window(so_long->mlx, so_long->win);
+	mlx_destroy_display(so_long->mlx);
 	exit(1);
 	return (0);
 }
