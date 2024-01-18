@@ -111,6 +111,14 @@ SRC = 	so_long \
 CFILES = $(SRC:%=src/%.c)
 
 BONUS_SRC =	so_long_bonus \
+			utils_bonus/entities_bonus \
+			utils_bonus/entity_builder_bonus \
+			utils_bonus/exit_handler_$(OS)_bonus \
+			utils_bonus/game_renderer_bonus \
+			utils_bonus/map_checker_utils_bonus \
+			utils_bonus/map_checker_bonus \
+			utils_bonus/map_parser_bonus \
+			utils_bonus/path_checker_bonus \
 
 
 BONUS_CFILES = $(BONUS_SRC:%=src/%.c)
@@ -181,10 +189,10 @@ $(MINILIBX_LIB): $(MINILIBX_PATH)Makefile
 	@make -C $(MINILIBX_PATH) all --no-print-directory 1>/dev/null
 	@echo "\t[INFO]\t[$(MINILIBX_LIB)]\t$(MINILIBX_LIB) is compiled ✅\n"
 
-$(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB)
+$(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@echo "$$BONUS_HEADER"
 	@printf "\t🤖 Compiling $(BONUS_NAME) 🌟...\r"
-	@$(CC) $(CFLAGS) $(BONUS_CFILES) $(BETTERFT_LIB) -o $(NAME)
+	@$(CC) $(BONUS_CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -o $(NAME)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(BONUS_NAME)]\t$(NAME) ($(BONUS_NAME)) 🌟 is compiled ✅\n"
 
