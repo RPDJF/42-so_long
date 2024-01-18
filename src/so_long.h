@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 13:22:06 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:48:09 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define ERR_MAP "MAP ERROR"
 # define ERR_MAP_FORMAT "MAP ERROR: Map is not using the correct format \"01PCE\""
 # define ERR_MAP_SHAPE "MAP ERROR: Map has an invalid shape"
+# define ERR_MAP_ELEMENTS "MAP ERROR: Map elements must to contain 1 Player, \
+1 Exit and at least 1 Collectible"
 # define ERR_MAP_IMPOSSIBLE "MAP ERROR: Map is impossible"
 
 typedef struct s_data
@@ -145,7 +147,8 @@ void		render_entities(t_so_long *so_long);
 //		map_checker:	tests the map, return 0 if correct
 //		returns 1 if invalid format
 //		returns 2 if invalid shape
-//		returns 3 if impossible map
+//		returns 3 if invalid nb elements (P==1, E==1, C>=1)
+//		returns 4 if impossible map
 int			map_checker(t_so_long *so_long, t_map *map);
 
 //	FROM FILE utils/map_parser.c

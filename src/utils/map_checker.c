@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 00:11:39 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 14:44:15 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,45 @@ static int	map_tester(t_so_long *so_long, t_map *map)
 	return (0);
 }
 
+static int	map_check_elements(t_map *map)
+{
+	int		score;
+	int		spawn;
+	int		exit;
+	t_pos	pos;
+
+	score = 0;
+	spawn = 0;
+	exit = 0;
+	pos.y = -1;
+	while (pos.y++, map->data[pos.y])
+	{
+		pos.x = -1;
+		while (pos.x++, map->data[pos.y][pos.x])
+		{
+			if (map->data[pos.y][pos.x] == 'C')
+				score++;
+			else if (map->data[pos.y][pos.x] == 'P')
+				spawn++;
+			else if (map->data[pos.y][pos.x] == 'E')
+				exit++;
+		}
+	}
+	if (spawn != 1 || exit != 1 || score < 1)
+		return (-1);
+	return (0);
+}
+
 int	map_checker(t_so_long *so_long, t_map *map)
 {
 	if (map_format_checker(map) < 0)
 		return (-1);
 	else if (map_shape_checker(map) < 0)
 		return (-2);
-	// need to check spawn, end and collectibles
+	else if (map_check_elements(map) < 0)
+		return (-3);
 	init_map(map);
 	if (map_tester(so_long, map) < 0)
-		return (-3);
+		return (-4);
 	return (0);
 }
