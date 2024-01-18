@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 01:04:53 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 01:11:24 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,17 @@ int	key_press(int keycode, void *param)
 	ft_printf("%d\n", keycode);
 	if (keycode == 53 || keycode == 65307)
 		secure_exit(so_long);
-	if (keycode == 65361 || keycode == 97)
+	if (keycode == 65361 || keycode == 97
+		|| keycode == 0 || keycode == 123)
 		movement_handler(so_long, LEFT);
-	if (keycode == 65363 || keycode == 100)
+	if (keycode == 65363 || keycode == 100
+		|| keycode == 2 || keycode == 124)
 		movement_handler(so_long, RIGHT);
-	if (keycode == 65362 || keycode == 119)
+	if (keycode == 65362 || keycode == 119
+		|| keycode == 13 || keycode == 126)
 		movement_handler(so_long, UP);
-	if (keycode == 65364 || keycode == 115)
+	if (keycode == 65364 || keycode == 115
+		|| keycode == 1 || keycode == 125)
 		movement_handler(so_long, DOWN);
 	render_map(so_long);
 	render_entities(so_long);
