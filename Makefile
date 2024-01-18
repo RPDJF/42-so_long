@@ -71,6 +71,7 @@ export BONUS_HEADER
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+OS =
 
 MINILIBX_MACOS_PATH = libs/minilibx_opengl/
 MINILIBX_LINUX_PATH = libs/minilibx-linux/
@@ -82,11 +83,13 @@ UNAME_S = $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	CFLAGS += -Lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 	MINILIBX_PATH = $(MINILIBX_LINUX_PATH)
+	OS = linux
 endif
 
 ifeq ($(UNAME_S),Darwin)
 	CFLAGS += -framework OpenGL -framework AppKit
 	MINILIBX_PATH = $(MINILIBX_MACOS_PATH)
+	OS = macos
 endif
 
 MINILIBX_LIB := $(MINILIBX_PATH:%=%$(MINILIBX_LIB))
@@ -97,7 +100,7 @@ BETTERFT_LIB = $(BETTERFT_PATH:%=%betterft.a)
 SRC = 	so_long \
 		utils/entities \
 		utils/entity_builder \
-		utils/exit_handler \
+		utils/exit_handler_$(OS) \
 		utils/game_renderer \
 		utils/map_checker \
 		utils/map_parser \

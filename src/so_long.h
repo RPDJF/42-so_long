@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 03:13:44 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:22:06 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int			secure_exit(void *param);
 //		error_exit:	simple exit with code 1, frees garbage collector and
 //		closes window
 int			error_exit(void *param);
+int			crash_exit(void *param);
 
 //	FROM FILE utils/game_renderer.c
 
