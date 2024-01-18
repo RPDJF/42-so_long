@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 16:18:08 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:25:12 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,12 @@ int	main(int argc, char **argv)
 	t_so_long	so_long;
 	t_entity	*player;
 
+	if (argc > 2)
+		ft_putendl_fd(TOO_MUCH_ARG, 2);
+	else if (argc < 2)
+		ft_putendl_fd(NOT_ENOUGH_ARGS, 2);
 	if (argc != 2)
-		return (1);
+		return (error_exit(0));
 	so_long.win = 0;
 	so_long.mlx = mlx_init();
 	so_long.map = get_map(&so_long, argv[1]);

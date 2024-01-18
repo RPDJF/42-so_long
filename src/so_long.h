@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 16:00:52 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 16:25:23 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define NB_MOVES "number of movements"
 
 // err messages
+# define TOO_MUCH_ARG "Too much arguments"
+# define NOT_ENOUGH_ARGS "Not enough arguments"
 # define ERR_MAP "Error\n"
 # define ERR_MAP_FORMAT "Error\nMap is not using the correct format \"01PCE\""
 # define ERR_MAP_SHAPE "Error\nMap has an invalid shape"
