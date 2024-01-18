@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 03:39:54 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:50:02 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,11 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
+	so_long.win = 0;
 	so_long.mlx = mlx_init();
 	so_long.map = get_map(&so_long, argv[1]);
 	if (!so_long.map)
-		secure_exit(&so_long);
+		error_exit(&so_long);
 	so_long.moves = 0;
 	so_long.score = 0;
 	so_long.win = mlx_new_window(so_long.mlx, so_long.map->width * GRID,
