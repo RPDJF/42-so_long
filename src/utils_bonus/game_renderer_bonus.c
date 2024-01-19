@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 22:51:40 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/19 02:28:23 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	render_map(t_so_long *so_long)
 				put_image(so_long, map->wall.img, pos);
 			else if (data[pos.y][pos.x] == '0'
 				|| data[pos.y][pos.x] == 'P'
+				|| data[pos.y][pos.x] == 'R'
 				|| (data[pos.y][pos.x] == 'E' && so_long->collectibles))
 				put_image(so_long, map->path.img, pos);
 			else if (data[pos.y][pos.x] == 'C')

@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 22:51:40 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/19 02:27:15 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	map_format_checker(t_map *map)
 {
-	const char	*valid_bytes = "01CEP";
+	const char	*valid_bytes = "01CEPR";
 	bool		trigger;
 	int			h;
 	int			i;

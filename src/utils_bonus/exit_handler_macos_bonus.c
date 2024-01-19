@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 23:58:11 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/19 01:51:16 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ int	secure_exit(void *param)
 	{
 		so_long = (t_so_long *)param;
 		if (so_long->win)
-		{
-			pthread_cancel(so_long->ticks);
 			mlx_destroy_window(so_long->mlx, so_long->win);
-		}
 	}
 	cleargarbage();
 	exit(0);
@@ -40,10 +37,7 @@ int	error_exit(void *param)
 	{
 		so_long = (t_so_long *)param;
 		if (so_long->win)
-		{
-			pthread_cancel(so_long->ticks);
 			mlx_destroy_window(so_long->mlx, so_long->win);
-		}
 	}
 	cleargarbage();
 	exit(1);
@@ -59,10 +53,7 @@ int	crash_exit(void *param)
 	{
 		so_long = (t_so_long *)param;
 		if (so_long->win)
-		{
-			pthread_cancel(so_long->ticks);
 			mlx_destroy_window(so_long->mlx, so_long->win);
-		}
 	}
 	cleargarbage();
 	exit(1);
