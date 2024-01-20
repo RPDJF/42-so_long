@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:20:47 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 20:00:27 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:03:15 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*load_xpm(t_so_long *so_long, char *file, int *width, int *height)
 {
-	t_img	*img;
+	void	*img;
 
 	img = mlx_xpm_file_to_image(so_long->mlx, file, width, height);
 	if (!img)
