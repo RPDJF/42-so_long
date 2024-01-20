@@ -6,68 +6,11 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/19 01:51:39 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:14:21 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	check_events(t_so_long *so_long)
-{
-	t_entity	*player;
-	char		**map;
-	char		event;
-
-	player = so_long->player;
-	map = so_long->map->data;
-	event = map[player->pos.y][player->pos.x];
-	if (event == 'C')
-	{
-		so_long->collectibles--;
-		map[player->pos.y][player->pos.x] = '0';
-		so_long->score++;
-	}
-	else if (event == 'E' && !so_long->collectibles)
-	{
-		ft_printf("You win !\n");
-		secure_exit(so_long);
-	}
-}
-
-void	movement_handler(t_so_long *so_long)
-{
-	t_entity	*player;
-	char		**map;
-	int			delta;
-	int			direction;
-
-	direction = so_long->player_direction;
-	player = so_long->player;
-	map = so_long->map->data;
-	delta = player->pos.x + player->pos.y;
-	if (direction == 0 && map[player->pos.y][player->pos.x - 1] != '1')
-		player->pos.x--;
-	else if (direction == 1 && map[player->pos.y][player->pos.x + 1] != '1')
-		player->pos.x++;
-	else if (direction == 2 && map[player->pos.y - 1][player->pos.x] != '1')
-		player->pos.y--;
-	else if (direction == 3 && map[player->pos.y + 1][player->pos.x] != '1')
-		player->pos.y++;
-	if (delta != player->pos.x + player->pos.y)
-		ft_printf("%s:\t%d\n", NB_MOVES, ++so_long->moves);
-	player->current_anim = player->anims[direction];
-	player->current_frame++;
-	player->current_frame %= player->current_anim.nb_frames;
-	check_events(so_long);
-}
 
 int	key_press(int keycode, void *param)
 {
@@ -94,32 +37,43 @@ int	key_press(int keycode, void *param)
 static t_so_long	*new_so_long(char *filename)
 {
 	t_so_long	*so_long;
-	t_entity	*player;
+	t_entity	player;
+	int			width;
+	int			height;
 
 	so_long = galloc(sizeof(t_so_long));
 	if (!so_long)
 		secure_exit(0);
 	so_long->win = 0;
 	so_long->mlx = mlx_init();
+	if (!so_long->mlx)
+		crash_exit(so_long);
 	so_long->map = get_map(so_long, filename);
 	so_long->moves = 0;
 	so_long->score = 0;
-	so_long->win = mlx_new_window(so_long->mlx, so_long->map->width * GRID,
-			so_long->map->height * GRID, "so_long");
+	width = (so_long->map->width + 4) * GRID;
+	height = (so_long->map->height + 7) * GRID;
+	so_long->win = mlx_new_window(so_long->mlx, width, height, "so_long");
+	if (!so_long->win)
+		crash_exit(so_long);
 	player = new_player(so_long->map->start, so_long);
 	so_long->player = player;
 	so_long->player_direction = 1;
 	return (so_long);
 }
 
-int	move_player(void *arg)
+int	ticks(void *arg)
 {
 	t_so_long	*so_long;
 
 	so_long = (t_so_long *)arg;
 	usleep(120000);
 	movement_handler(so_long);
+	move_enemies(so_long);
+	events_handler(so_long);
 	render_all(so_long);
+	teleport_handler(so_long, &so_long->player);
+	events_handler(so_long);
 	return (0);
 }
 
@@ -137,7 +91,7 @@ int	main(int argc, char **argv)
 	mlx_hook(so_long->win, 2, 1L << 0, key_press, so_long);
 	mlx_hook(so_long->win, 17, 0, secure_exit, so_long);
 	mlx_expose_hook(so_long->win, render_all, so_long);
-	mlx_loop_hook(so_long->mlx, move_player, so_long);
+	mlx_loop_hook(so_long->mlx, ticks, so_long);
 	mlx_loop(so_long->mlx);
 	return (0);
 }

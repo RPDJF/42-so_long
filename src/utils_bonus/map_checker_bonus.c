@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/19 02:27:15 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:58:22 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	map_format_checker(t_map *map)
 {
-	const char	*valid_bytes = "01CEPR";
 	bool		trigger;
 	int			h;
 	int			i;
@@ -28,8 +27,8 @@ static int	map_format_checker(t_map *map)
 		{
 			trigger = false;
 			j = -1;
-			while (j++, valid_bytes[j])
-				if ((map->data[h])[i] == valid_bytes[j])
+			while (j++, MAP_FORMAT[j])
+				if ((map->data[h])[i] == MAP_FORMAT[j])
 					trigger = true;
 			if (!trigger)
 				return (-1);
@@ -40,7 +39,7 @@ static int	map_format_checker(t_map *map)
 
 static	int	map_shape_checker(t_map *map)
 {
-	int		i;
+	int	i;
 
 	while (map->data && map->data[map->height])
 	{
@@ -49,18 +48,18 @@ static	int	map_shape_checker(t_map *map)
 		if (map->width < 3
 			|| (int)ft_strlen(map->data[map->height]) != map->width)
 			return (-1);
-		if (map->height == 0 || !map->data[map->height + 1])
-		{
-			i = -1;
-			while (i++, map->data[map->height][i])
-				if (map->data[map->height][i] != '1')
-					return (-1);
-		}
-		if (map->data[map->height][0] != '1'
-			|| map->data[map->height][map->width - 1] != '1')
+		if ((map->data[map->height][0] != '1'
+			&& map->data[map->height][map->width - 1] == '1')
+			|| (map->data[map->height][map->width - 1] != '1'
+			&& map->data[map->height][0] == '1'))
 			return (-1);
 		map->height++;
 	}
+	i = -1;
+	while (i++, map->data[0][i])
+		if ((map->data[0][i] != '1' && map->data[map->height - 1][i] == '1')
+			|| (map->data[map->height - 1][i] != '1' && map->data[0][i] == '1'))
+			return (-1);
 	if (map->height < 3)
 		return (-1);
 	return (0);
@@ -111,7 +110,8 @@ int	map_checker(t_so_long *so_long, t_map *map)
 	so_long->collectibles = map_check_elements(map);
 	if (so_long->collectibles < 0)
 		return (-3);
-	init_map(map);
+	reset_map(so_long->map);
+	init_map(so_long);
 	if (map_tester(so_long, map) < 0)
 		return (-4);
 	return (0);

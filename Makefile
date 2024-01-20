@@ -111,13 +111,17 @@ SRC = 	so_long \
 CFILES = $(SRC:%=src/%.c)
 
 BONUS_SRC =	so_long_bonus \
+			utils_bonus/enemies_ia_bonus \
+			utils_bonus/engine_bonus \
 			utils_bonus/entities_bonus \
+			utils_bonus/entities_utils_bonus \
 			utils_bonus/entity_builder_bonus \
 			utils_bonus/exit_handler_$(OS)_bonus \
 			utils_bonus/game_renderer_bonus \
 			utils_bonus/map_checker_utils_bonus \
 			utils_bonus/map_checker_bonus \
 			utils_bonus/map_parser_bonus \
+			utils_bonus/mlx_wrapper_bonus \
 			utils_bonus/path_checker_bonus \
 
 
@@ -151,6 +155,8 @@ fclean: clean
 re: fclean all
 
 bonus: $(BONUS_NAME)
+
+bonus_debug: $(BONUS_NAME)
 
 help:
 	@echo "$$HEADER"
@@ -196,7 +202,15 @@ $(BONUS_NAME): $(BONUS_CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
 	@printf "\33[2K"
 	@echo "\t[INFO]\t[$(BONUS_NAME)]\t$(NAME) ($(BONUS_NAME)) 🌟 is compiled ✅\n"
 
+bonus_debug: $(BONUS_CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB)
+	@echo "$$BONUS_HEADER"
+	@printf "\t🤖 Compiling $(BONUS_NAME) 🌟...\r"
+	@$(CC) $(BONUS_CFILES) $(BETTERFT_LIB) $(MINILIBX_LIB) $(CFLAGS) -g3 -fsanitize=address -o $(NAME)
+	@printf "\33[2K"
+	@echo "\t[INFO]\t[$(BONUS_NAME)]\t$(NAME) ($(BONUS_NAME)) 🌟 is compiled ✅\n"
+	@echo "\nThe programm was compiled with debug sanitizer set to address\nDo not forget to use \"leak -atExit -- $(NAME)\" in order to check for potential leaks.\nNote that it won't work with the debug version.\n\nFor better debug, you can use \"lldb $(name) <args>\" after using debug rule.\n\n"
+
 header:
 	@echo "$$HEADER"
 
-.PHONY = all clean fclean re bonus header help
+.PHONY = all clean fclean re bonus header help bonus_debug

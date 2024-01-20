@@ -6,23 +6,20 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:46:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 22:51:40 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 18:22:21 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-t_entity	*new_entity(char *name, t_pos pos, t_anim *anims, t_so_long *sl)
+t_entity	new_entity(char *name, t_pos pos, t_anim *anims)
 {
-	t_entity	*entity;
+	t_entity	entity;
 
-	entity = galloc(sizeof(t_entity));
-	if (!entity)
-		crash_exit(sl);
-	entity->name = name;
-	entity->pos.x = pos.x;
-	entity->pos.y = pos.y;
-	entity->anims = anims;
+	entity.name = name;
+	entity.pos.x = pos.x;
+	entity.pos.y = pos.y;
+	entity.anims = anims;
 	return (entity);
 }
 
@@ -45,8 +42,7 @@ static t_xpm	*fetch_frames(char *base_filename, int nb_frames, t_so_long *sl)
 		filename = ft_strreplace(base_filename, "{id}", tmp);
 		if (!filename)
 			crash_exit(sl);
-		frames[i].img = mlx_xpm_file_to_image(sl->mlx, filename,
-				&(frames->width), &(frames->height));
+		frames[i].img = load_xpm(sl, filename, &frames->width, &frames->height);
 		gfree(filename);
 		gfree(tmp);
 	}

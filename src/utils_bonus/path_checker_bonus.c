@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 19:08:24 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 22:51:40 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 17:28:46 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ static int	path_finder(t_map *map, t_pos pos1, t_pos pos2, t_list *history)
 	}
 	if (path_finder_h(map, pos1, pos2, history)
 		|| path_finder_v(map, pos1, pos2, history))
+	{
+		ft_lstclear(&head, gfree);
 		return (1);
+	}
+	ft_lstclear(&head, gfree);
 	return (0);
 }
 

@@ -1,0 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   entities_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/20 18:47:27 by rude-jes          #+#    #+#             */
+/*   Updated: 2024/01/20 18:57:38 by rude-jes         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../so_long_bonus.h"
+
+void	load_enemies(t_so_long *so_long, t_pos pos)
+{
+	so_long->enemies = ft_reallocf(so_long->enemies,
+			so_long->nb_enemies * sizeof(t_entity),
+			(so_long->nb_enemies + 1) * sizeof(t_entity));
+	so_long->enemies[so_long->nb_enemies] = new_enemy(pos, so_long);
+	so_long->nb_enemies++;
+}
+
+void	animate(t_entity *entity, int anim_idx)
+{
+	entity->current_anim = entity->anims[anim_idx];
+	entity->current_frame++;
+	entity->current_frame %= entity->current_anim.nb_frames;
+}
