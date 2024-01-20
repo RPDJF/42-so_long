@@ -6,13 +6,12 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/19 01:51:16 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:33:35 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 #include <stdio.h>
-#include <signal.h>
 
 int	secure_exit(void *param)
 {
@@ -58,4 +57,19 @@ int	crash_exit(void *param)
 	cleargarbage();
 	exit(1);
 	return (1);
+}
+
+void	map_error_handler(t_so_long *so_long, int status)
+{
+	if (!so_long->map->data)
+		crash_exit(so_long);
+	else if (status == -1)
+		ft_putendl_fd(ERR_MAP_FORMAT, 2);
+	else if (status == -2)
+		ft_putendl_fd(ERR_MAP_SHAPE, 2);
+	else if (status == -3)
+		ft_putendl_fd(ERR_MAP_ELEMENTS, 2);
+	else if (status == -4)
+		ft_putendl_fd(ERR_MAP_IMPOSSIBLE, 2);
+	error_exit(so_long);
 }

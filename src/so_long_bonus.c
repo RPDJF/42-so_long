@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:14:21 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:29:25 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	key_press(int keycode, void *param)
 		secure_exit(so_long);
 	if (keycode == 65361 || keycode == 97
 		|| keycode == 0 || keycode == 123)
-		so_long->player_direction = LEFT;
+		so_long->player.direction = LEFT;
 	if (keycode == 65363 || keycode == 100
 		|| keycode == 2 || keycode == 124)
-		so_long->player_direction = RIGHT;
+		so_long->player.direction = RIGHT;
 	if (keycode == 65362 || keycode == 119
 		|| keycode == 13 || keycode == 126)
-		so_long->player_direction = UP;
+		so_long->player.direction = UP;
 	if (keycode == 65364 || keycode == 115
 		|| keycode == 1 || keycode == 125)
-		so_long->player_direction = DOWN;
+		so_long->player.direction = DOWN;
 	return (0);
 }
 
@@ -58,7 +58,7 @@ static t_so_long	*new_so_long(char *filename)
 		crash_exit(so_long);
 	player = new_player(so_long->map->start, so_long);
 	so_long->player = player;
-	so_long->player_direction = 1;
+	so_long->player.direction = 1;
 	return (so_long);
 }
 

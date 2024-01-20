@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 16:14:19 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:16:41 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:19:43 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ void	move_enemies(t_so_long *so_long)
 			pos->x--;
 		else
 			pos->x++;
-		enemies->current_frame++;
-		enemies->current_frame %= enemies->anims->nb_frames;
-		enemies = &enemies[1];
+		animate(enemies, enemies->direction % 2);
 		i++;
 	}
 }

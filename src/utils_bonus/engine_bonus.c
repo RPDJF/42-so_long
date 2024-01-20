@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.c                                           :+:      :+:    :+:   */
+/*   engine_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:49:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:14:32 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:28:29 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	movement_handler(t_so_long *so_long)
 	int			direction;
 	t_pos		*pos;
 
-	direction = so_long->player_direction;
 	player = &so_long->player;
+	direction = player->direction;
 	pos = &player->pos;
 	map = so_long->map->data;
 	delta = pos->x + pos->y;

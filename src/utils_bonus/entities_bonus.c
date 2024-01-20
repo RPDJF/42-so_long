@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:49:48 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 16:55:07 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:22:58 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ t_entity	new_player(t_pos pos, t_so_long *so_long)
 	if (!anims)
 		crash_exit(so_long);
 	player.anims = anims;
-	anims[0] = new_anim("player", "left", 4, so_long);
-	anims[1] = new_anim("player", "right", 4, so_long);
-	anims[2] = new_anim("player", "up", 4, so_long);
-	anims[3] = new_anim("player", "down", 4, so_long);
+	anims[LEFT] = new_anim("player", "left", 4, so_long);
+	anims[RIGHT] = new_anim("player", "right", 4, so_long);
+	anims[UP] = new_anim("player", "up", 4, so_long);
+	anims[DOWN] = new_anim("player", "down", 4, so_long);
 	player.current_anim = anims[1];
 	player.current_frame = 0;
 	return (player);
@@ -46,12 +46,13 @@ t_entity	new_enemy(t_pos pos, t_so_long *so_long)
 	if (!name)
 		crash_exit(so_long);
 	enemy = new_entity(name, pos, 0);
-	enemy.nb_anims = 1;
+	enemy.nb_anims = 2;
 	anims = galloc(sizeof(t_anim) * enemy.nb_anims);
 	if (!anims)
 		crash_exit(so_long);
 	enemy.anims = anims;
-	anims[0] = new_anim("enemy", "right", 4, so_long);
+	anims[LEFT] = new_anim("enemy", "left", 4, so_long);
+	anims[RIGHT] = new_anim("enemy", "right", 4, so_long);
 	enemy.current_anim = anims[0];
 	enemy.current_frame = 0;
 	enemy.direction = UP;

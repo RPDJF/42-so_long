@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:13:18 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:30:55 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_entity
 	t_anim	*anims;
 	int		nb_anims;
 	t_anim	current_anim;
-	bool	anim_active;
 	int		current_frame;
 }			t_entity;
 
@@ -124,9 +123,6 @@ typedef struct s_so_long
 	t_entity	player;
 	t_entity	*enemies;
 	size_t		nb_enemies;
-	t_entity	*entities;
-	int			player_direction;
-	pthread_t	ticks;
 }				t_so_long;
 
 //	FROM FILE utils/enemies_ia.c

@@ -1,0 +1,31 @@
+/* XPM */
+static char * left_3_xpm[] = {
+/* columns rows colors chars-per-pixel */
+"20 20 6 1",
+" 	c None",
+".	c black",
+"X	c #ED1C24",
+"o	c #99D9EA",
+"O	c white",
+"+	c #546D8E",
+/* pixels */
+"                    ",
+"       ....         ",
+"      .XXXX..       ",
+"     .XXXXXXX.      ",
+"     ......XX.      ",
+"    .oOOo+..XX.     ",
+"    .oooo++.XX.     ",
+"    .+++++..XX...   ",
+"     ......XXX.X.   ",
+"     .XXXXXXXX.XX.  ",
+"     .XXXXXXXX.XX.  ",
+"     .XXXXXXXX.XX.  ",
+"     .XXXXXXXX.XX.  ",
+"     .XXXXXXXX..X.  ",
+"    .XXXXX..XXX...  ",
+"    .XXXXX..XXX.    ",
+"    .XXXX.  ....    ",
+"     ....           ",
+"                    ",
+"                    "};

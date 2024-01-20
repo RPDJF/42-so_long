@@ -6,13 +6,12 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:01:02 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:32:00 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 #include <stdio.h>
-#include <signal.h>
 
 int	secure_exit(void *param)
 {
