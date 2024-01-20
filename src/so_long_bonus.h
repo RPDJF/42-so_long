@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:30:55 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:01:27 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 // compatibility checker
 # ifdef __APPLE__
 #  include "../libs/minilibx_opengl/mlx.h"
-#  include "../libs/minilibx_opengl/mlx_int.h"
 # endif
 
 # ifndef __APPLE__
@@ -213,7 +212,7 @@ int			init_map(t_so_long *so_long);
 //	FROM FILE utils/mlx_wrapper.c
 
 //		load_mpx:	Load mpx img and add it to the betterft garbage collector
-t_img		*load_xpm(t_so_long *so_long, char *file, int *width, int *height);
+void		*load_xpm(t_so_long *so_long, char *file, int *width, int *height);
 
 //	FROM FILE utils/path_checker.c
 
