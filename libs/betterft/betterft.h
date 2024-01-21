@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:19:26 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 02:39:30 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:11:01 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void		*ft_memmove(void *dest, const void *src, size_t n);
 void		*ft_memset(void *s, int c, size_t n);
 //	ft_memsuperclear: Frees references in the 'm' array and clears the memory
 //	itself for a total size of 'size'.
-void		ft_memsuperclear(char **m, size_t size);
+void		ft_memsuperclear(void **m, size_t size);
 //	ft_absol: Returns the absolute value of the integer 'nb'.
 int			ft_absol(int nb);
 //	ft_max: Returns the largest integer value between 'nb1' and 'nb2'.
