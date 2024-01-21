@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 16:00:49 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:08:02 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	put_image(t_so_long *so_long, void *img, t_pos pos)
 
 	mlx = so_long->mlx;
 	win = so_long->win;
-	mlx_put_image_to_window(mlx, win, img, pos.x * GRID, pos.y * GRID);
+	mlx_put_image_to_window(mlx, win, img,
+		(pos.x + 2) * GRID, (pos.y + 4) * GRID);
 }
 
 void	render_map(t_so_long *so_long)
@@ -40,6 +41,7 @@ void	render_map(t_so_long *so_long)
 				put_image(so_long, map->wall.img, pos);
 			else if (data[pos.y][pos.x] == '0'
 				|| data[pos.y][pos.x] == 'P'
+				|| data[pos.y][pos.x] == 'R'
 				|| (data[pos.y][pos.x] == 'E' && so_long->collectibles))
 				put_image(so_long, map->path.img, pos);
 			else if (data[pos.y][pos.x] == 'C')
@@ -52,11 +54,11 @@ void	render_map(t_so_long *so_long)
 
 void	render_entities(t_so_long *so_long)
 {
-	t_entity	*player;
+	t_entity	player;
 
 	player = so_long->player;
 	put_image(so_long,
-		player->current_anim.frames[player->current_frame].img, player->pos);
+		player.current_anim.frames[player.current_frame].img, player.pos);
 }
 
 int	render_all(void *param)

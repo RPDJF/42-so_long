@@ -98,14 +98,17 @@ BETTERFT_PATH = libs/betterft/
 BETTERFT_LIB = $(BETTERFT_PATH:%=%betterft.a)
 
 SRC = 	so_long \
+		utils/engine \
 		utils/entities \
+		utils/entities_utils \
 		utils/entity_builder \
 		utils/exit_handler_$(OS) \
 		utils/game_renderer \
 		utils/map_checker_utils \
 		utils/map_checker \
 		utils/map_parser \
-		utils/path_checker \
+		utils/mlx_wrapper_$(OS) \
+		utils/pathfinding \
 
 
 CFILES = $(SRC:%=src/%.c)

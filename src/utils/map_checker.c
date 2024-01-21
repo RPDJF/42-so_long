@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/18 15:24:13 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:56:17 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static int	map_format_checker(t_map *map)
 {
-	const char	*valid_bytes = "01CEP";
 	bool		trigger;
 	int			h;
 	int			i;
@@ -28,8 +27,8 @@ static int	map_format_checker(t_map *map)
 		{
 			trigger = false;
 			j = -1;
-			while (j++, valid_bytes[j])
-				if ((map->data[h])[i] == valid_bytes[j])
+			while (j++, MAP_FORMAT[j])
+				if ((map->data[h])[i] == MAP_FORMAT[j])
 					trigger = true;
 			if (!trigger)
 				return (-1);
@@ -68,7 +67,7 @@ static	int	map_shape_checker(t_map *map)
 
 static int	map_tester(t_so_long *so_long, t_map *map)
 {
-	if (check_path(so_long, map, map->start, map->end) <= 0)
+	if (get_path(so_long, map->start, map->end) < 0)
 		return (-1);
 	return (0);
 }
@@ -111,7 +110,8 @@ int	map_checker(t_so_long *so_long, t_map *map)
 	so_long->collectibles = map_check_elements(map);
 	if (so_long->collectibles < 0)
 		return (-3);
-	init_map(map);
+	reset_map(so_long->map);
+	init_map(so_long);
 	if (map_tester(so_long, map) < 0)
 		return (-4);
 	return (0);

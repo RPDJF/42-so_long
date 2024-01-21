@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_checker_utils.c                                :+:      :+:    :+:   */
+/*   entities_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/18 14:59:32 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 18:48:10 by rude-jes         ###   ########.fr       */
+/*   Created: 2024/01/20 18:47:27 by rude-jes          #+#    #+#             */
+/*   Updated: 2024/01/21 18:48:26 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	check_map_name(char *filename)
+void	animate(t_entity *entity, int anim_idx)
 {
-	if (ft_strlen(filename) <= 4 || filename[ft_strlen(filename) - 1] != 'r'
-		|| filename[ft_strlen(filename) - 2] != 'e'
-		|| filename[ft_strlen(filename) - 3] != 'b'
-		|| filename[ft_strlen(filename) - 4] != '.')
-	{
-		ft_putendl_fd(ERR_MAP_EXTENSION, 2);
-		error_exit(0);
-	}
+	entity->current_anim = entity->anims[anim_idx];
+	entity->current_frame++;
+	entity->current_frame %= entity->current_anim.nb_frames;
 }

@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 18:53:43 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:43:53 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,11 @@ void	render_entities(t_so_long *so_long)
 		player.current_anim.frames[player.current_frame].img, player.pos);
 }
 
-int	render_all(void *param)
+static void	render_text(t_so_long *so_long)
 {
-	t_so_long	*so_long;
-	t_pos		pos;
 	char		*text;
+	t_pos		pos;
 
-	so_long = (t_so_long *)param;
-	mlx_clear_window(so_long->mlx, so_long->win);
-	render_map(so_long);
-	render_entities(so_long);
 	pos.x = (so_long->map->width / 2 - 2) * GRID;
 	pos.y = 2 * GRID;
 	text = ft_strjoin(NB_MOVES, ft_itoa(so_long->moves));
@@ -98,5 +93,17 @@ int	render_all(void *param)
 	mlx_string_put(so_long->mlx, so_long->win,
 		pos.x, pos.y, WHITE, text);
 	gfree(text);
+}
+
+int	render_all(void *param)
+{
+	t_so_long	*so_long;
+	t_pos		pos;
+
+	so_long = (t_so_long *)param;
+	mlx_clear_window(so_long->mlx, so_long->win);
+	render_map(so_long);
+	render_entities(so_long);
+	render_text(so_long);
 	return (0);
 }
