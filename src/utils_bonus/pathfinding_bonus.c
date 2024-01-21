@@ -6,11 +6,11 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 22:06:30 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 04:13:34 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:23:59 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../so_long_bonus.h"
 
 static char	**map_dup(t_so_long *so_long)
 {
