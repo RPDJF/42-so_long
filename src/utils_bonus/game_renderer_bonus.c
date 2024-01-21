@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 19:43:53 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:01:32 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void	render_entities(t_so_long *so_long)
 	t_entity	*enemies;
 	size_t		i;
 
+	player = so_long->player;
+	put_image(so_long,
+		player.current_anim.frames[player.current_frame].img, player.pos);
 	enemies = so_long->enemies;
 	i = 0;
 	while (i < so_long->nb_enemies)
@@ -67,9 +70,6 @@ void	render_entities(t_so_long *so_long)
 			enemies[i].pos);
 		i++;
 	}
-	player = so_long->player;
-	put_image(so_long,
-		player.current_anim.frames[player.current_frame].img, player.pos);
 }
 
 static void	render_text(t_so_long *so_long)
@@ -98,7 +98,6 @@ static void	render_text(t_so_long *so_long)
 int	render_all(void *param)
 {
 	t_so_long	*so_long;
-	t_pos		pos;
 
 	so_long = (t_so_long *)param;
 	mlx_clear_window(so_long->mlx, so_long->win);

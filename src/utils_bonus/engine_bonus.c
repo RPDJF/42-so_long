@@ -6,17 +6,11 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:49:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:28:29 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:11:49 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
-
-static void	game_win(t_so_long *so_long)
-{
-	ft_printf("You win !\n");
-	secure_exit(so_long);
-}
 
 void	movement_handler(t_so_long *so_long)
 {
@@ -68,8 +62,23 @@ int	teleport_handler(t_so_long *so_long, t_entity *e)
 		|| (e->pos.x == 0)
 		|| (e->pos.y == so_long->map->height - 1)
 		|| (e->pos.y == 0))
-		return (render_all(so_long));
+	{
+		render_all(so_long);
+		events_handler(so_long);
+	}
 	return (-1);
+}
+
+static int	check_ghost_collision(t_so_long *so_long)
+{
+	long	i;
+
+	i = -1;
+	while (i++, (size_t)i < so_long->nb_enemies)
+		if (so_long->player.pos.x == so_long->enemies[i].pos.x
+			&& so_long->player.pos.y == so_long->enemies[i].pos.y)
+			return (1);
+	return (0);
 }
 
 void	events_handler(t_so_long *so_long)
@@ -81,10 +90,12 @@ void	events_handler(t_so_long *so_long)
 	player = so_long->player;
 	map = so_long->map->data;
 	event = map[player.pos.y][player.pos.x];
-	if (event == 'C')
+	if (check_ghost_collision(so_long))
+		so_long->is_over = true;
+	else if (event == 'C')
 		collect_score(so_long);
 	else if (event == 'E' && !so_long->collectibles)
-		game_win(so_long);
+		so_long->is_over = true;
 }
 
 void	collect_score(t_so_long *so_long)

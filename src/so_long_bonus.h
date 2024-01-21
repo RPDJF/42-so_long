@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 02:33:09 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:11:16 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ typedef struct s_map
 
 typedef struct s_so_long
 {
+	bool		is_over;
 	int			score;
 	int			collectibles;
 	int			moves;
