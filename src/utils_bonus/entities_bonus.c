@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:49:48 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 03:47:02 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:54:34 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char	*get_entity_color(t_so_long *so_long, char *name)
 	static int		id;
 
 	id = id % 4;
+	color = 0;
 	if (id == 0)
 		color = ft_strjoin("red_", name);
 	else if (id == 1)
