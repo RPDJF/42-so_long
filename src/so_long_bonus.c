@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 20:11:36 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:38:31 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,25 @@ int	ticks(void *arg)
 	so_long = (t_so_long *)arg;
 	if (so_long->is_over)
 		return (0);
-	usleep(120000);
+	usleep(100000);
 	if (so_long->is_over)
 		return (0);
-	movement_handler(so_long);
-	events_handler(so_long);
-	move_enemies(so_long);
+	movement_handler(so_long, &so_long->player);
 	events_handler(so_long);
 	render_all(so_long);
+	if (so_long->is_over)
+		return (0);
+	foreach_entities(get_dir,
+		so_long, so_long->enemies, so_long->nb_enemies);
+	foreach_entities(movement_handler,
+		so_long, so_long->enemies, so_long->nb_enemies);
+	events_handler(so_long);
+	render_all(so_long);
+	if (so_long->is_over)
+		return (0);
 	teleport_handler(so_long, &so_long->player);
+	foreach_entities(teleport_handler,
+		so_long, so_long->enemies, so_long->nb_enemies);
 	return (0);
 }
 

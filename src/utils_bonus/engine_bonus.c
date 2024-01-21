@@ -6,23 +6,21 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:49:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 20:11:49 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:39:12 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long_bonus.h"
 
-void	movement_handler(t_so_long *so_long)
+int	movement_handler(t_so_long *so_long, t_entity *entity)
 {
-	t_entity	*player;
 	char		**map;
 	int			delta;
 	int			direction;
 	t_pos		*pos;
 
-	player = &so_long->player;
-	direction = player->direction;
-	pos = &player->pos;
+	direction = entity->direction;
+	pos = &entity->pos;
 	map = so_long->map->data;
 	delta = pos->x + pos->y;
 	if (pos->x > 0 && direction == LEFT && map[pos->y][pos->x - 1] != '1')
@@ -37,7 +35,8 @@ void	movement_handler(t_so_long *so_long)
 		pos->y++;
 	if (delta != pos->x + pos->y)
 		++so_long->moves;
-	animate(player, direction);
+	animate(entity, direction % entity->nb_anims);
+	return (0);
 }
 
 int	teleport_handler(t_so_long *so_long, t_entity *e)
@@ -48,7 +47,7 @@ int	teleport_handler(t_so_long *so_long, t_entity *e)
 		|| (e->pos.y == so_long->map->height - 1))
 	{
 		mlx_do_sync(so_long->mlx);
-		usleep(120000);
+		usleep(10000);
 	}
 	if (e->pos.x == 0)
 		e->pos.x = so_long->map->width - 1;

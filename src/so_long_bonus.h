@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 20:11:16 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:32:34 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,13 +127,13 @@ typedef struct s_so_long
 
 //	FROM FILE utils/enemies_ia.c
 
-//		move_enemies:	trigger enemie ia
-void		move_enemies(t_so_long *so_long);
+//		get_dir:	set and return next position for enemy
+int			get_dir(t_so_long *so_long, t_entity *enemy);
 
 //	FROM FILE utils/engine.c
 
 //		movement_handler:	handles player movements
-void		movement_handler(t_so_long *so_long);
+int			movement_handler(t_so_long *so_long, t_entity *entity);
 //		teleport_handler:	handles entities teleportation
 int			teleport_handler(t_so_long *so_long, t_entity *e);
 //		events_handler:		handles events
@@ -151,10 +151,13 @@ t_entity	new_enemy(t_pos pos, t_so_long *so_long);
 
 //	FROM FILE utils/entities_utils.c
 
-//		creates an instance of each enemy in t_so_long
+//		load_enemies:	creates an instance of each enemy in t_so_long
 void		load_enemies(t_so_long *so_long, t_pos pos);
-//		play next frame of entity animaion index
+//		animate:	play next frame of entity animaion index
 void		animate(t_entity *entity, int anim_idx);
+//		foreach_entities:	iterate function f for each entity in entities
+void		foreach_entities(int (*f)(t_so_long *, t_entity *),
+				t_so_long *so_long, t_entity *entities, size_t size);
 
 //	FROM FILE utils/entity_builder.c
 //		entity building utilities
