@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:29:25 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 03:18:36 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (error_exit(0));
 	so_long = new_so_long(argv[1]);
+	srand(time(NULL));
 	mlx_hook(so_long->win, 2, 1L << 0, key_press, so_long);
 	mlx_hook(so_long->win, 17, 0, secure_exit, so_long);
 	mlx_expose_hook(so_long->win, render_all, so_long);

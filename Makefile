@@ -122,7 +122,7 @@ BONUS_SRC =	so_long_bonus \
 			utils_bonus/map_checker_bonus \
 			utils_bonus/map_parser_bonus \
 			utils_bonus/mlx_wrapper_$(OS)_bonus \
-			utils_bonus/path_checker_bonus \
+			utils_bonus/pathfinding_bonus \
 
 
 BONUS_CFILES = $(BONUS_SRC:%=src/%.c)

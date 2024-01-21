@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 20:01:27 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 02:33:09 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,9 +214,9 @@ int			init_map(t_so_long *so_long);
 //		load_mpx:	Load mpx img and add it to the betterft garbage collector
 void		*load_xpm(t_so_long *so_long, char *file, int *width, int *height);
 
-//	FROM FILE utils/path_checker.c
+//	FROM FILE utils/pathfinding.c
 
-//		check_path:	Check if path is possible between 2 t_pos positions
-int			check_path(t_so_long *so_long, t_map *map, t_pos pos1, t_pos pos2);
+//		get_path:	Returns RIGHT LEFT UP or DOWN if possible, -1 if not
+int			get_path(t_so_long *so_long, t_pos p1, t_pos p2);
 
 #endif
