@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 21:36:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:14:48 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:53:43 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,25 +75,28 @@ void	render_entities(t_so_long *so_long)
 int	render_all(void *param)
 {
 	t_so_long	*so_long;
-	t_pos		pos_mov;
-	t_pos		pos_sco;
+	t_pos		pos;
 	char		*text;
 
 	so_long = (t_so_long *)param;
 	mlx_clear_window(so_long->mlx, so_long->win);
 	render_map(so_long);
 	render_entities(so_long);
-	pos_mov.x = (so_long->map->width / 2 - 2) * GRID;
-	pos_mov.y = 2 * GRID;
-	pos_sco.x = pos_mov.x;
-	pos_sco.y = pos_mov.y + GRID;
+	pos.x = (so_long->map->width / 2 - 2) * GRID;
+	pos.y = 2 * GRID;
 	text = ft_strjoin(NB_MOVES, ft_itoa(so_long->moves));
+	if (!text)
+		crash_exit(so_long);
 	mlx_string_put(so_long->mlx, so_long->win,
-		pos_mov.x, pos_mov.y, WHITE, text);
+		pos.x, pos.y, WHITE, text);
 	gfree(text);
+	pos.x = pos.x;
+	pos.y = pos.y + GRID;
 	text = ft_strjoin(NB_SCORE, ft_itoa(so_long->score));
+	if (!text)
+		crash_exit(so_long);
 	mlx_string_put(so_long->mlx, so_long->win,
-		pos_sco.x, pos_sco.y, WHITE, text);
+		pos.x, pos.y, WHITE, text);
 	gfree(text);
 	return (0);
 }
