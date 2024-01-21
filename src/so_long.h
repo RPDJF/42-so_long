@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 18:58:52 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:48:17 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,17 +120,10 @@ typedef struct s_so_long
 	t_entity	player;
 }				t_so_long;
 
-//	FROM FILE utils/enemies_ia.c
-
-//		move_enemies:	trigger enemie ia
-void		move_enemies(t_so_long *so_long);
-
 //	FROM FILE utils/engine.c
 
 //		movement_handler:	handles player movements
 void		movement_handler(t_so_long *so_long);
-//		teleport_handler:	handles entities teleportation
-int			teleport_handler(t_so_long *so_long, t_entity *e);
 //		events_handler:		handles events
 void		events_handler(t_so_long *so_long);
 //		collect_score:	collectible event
@@ -141,13 +134,9 @@ void		collect_score(t_so_long *so_long);
 
 //		new_player: creates a new player
 t_entity	new_player(t_pos pos, t_so_long *so_long);
-//		new_enemy: creates a new enemy
-t_entity	new_enemy(t_pos pos, t_so_long *so_long);
 
 //	FROM FILE utils/entities_utils.c
 
-//		creates an instance of each enemy in t_so_long
-void		load_enemies(t_so_long *so_long, t_pos pos);
 //		play next frame of entity animaion index
 void		animate(t_entity *entity, int anim_idx);
 

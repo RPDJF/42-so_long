@@ -159,8 +159,6 @@ re: fclean all
 
 bonus: $(BONUS_NAME)
 
-bonus_debug: $(BONUS_NAME)
-
 help:
 	@echo "$$HEADER"
 	@echo "all		-	Build $(NAME)"
