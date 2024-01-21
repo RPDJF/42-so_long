@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 22:06:30 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 02:53:37 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:13:34 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,5 @@ int	get_path(t_so_long *so_long, t_pos p1, t_pos p2)
 
 	map_cpy = map_dup(so_long);
 	status = pathfinder(so_long, map_cpy, p1, p2);
-	ft_printf("%d\n", status);
 	return (status);
 }
