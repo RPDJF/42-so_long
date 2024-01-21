@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 23:38:31 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 00:39:54 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static t_so_long	*new_so_long(char *filename)
 	player = new_player(so_long->map->start, so_long);
 	so_long->player = player;
 	so_long->player.direction = 1;
+	so_long->is_over = false;
 	return (so_long);
 }
 

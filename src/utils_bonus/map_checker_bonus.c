@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 02:34:25 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 00:41:08 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,19 @@ static	int	map_shape_checker(t_map *map)
 
 static int	map_tester(t_so_long *so_long, t_map *map)
 {
+	t_pos	pos;
+
 	if (get_path(so_long, map->start, map->end) < 0)
 		return (-1);
+	pos.y = -1;
+	while (pos.y++, pos.y < map->height)
+	{
+		pos.x = -1;
+		while (pos.x++, pos.x < map->width)
+			if (map->data[pos.y][pos.x] == 'C')
+				if (get_path(so_long, map->start, pos) < 0)
+					return (-1);
+	}
 	return (0);
 }
 
