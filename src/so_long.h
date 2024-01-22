@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 23:48:17 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 04:45:53 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,6 @@ typedef struct s_so_long
 void		movement_handler(t_so_long *so_long);
 //		events_handler:		handles events
 void		events_handler(t_so_long *so_long);
-//		collect_score:	collectible event
-void		collect_score(t_so_long *so_long);
 
 //	FROM FILE utils/entities.c
 //		models of pre-existent entities

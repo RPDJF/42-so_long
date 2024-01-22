@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:49:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 19:29:11 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 04:46:11 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,18 @@ static void	game_win(t_so_long *so_long)
 {
 	ft_printf("You win !\n");
 	secure_exit(so_long);
+}
+
+static void	collect_score(t_so_long *so_long)
+{
+	t_entity	player;
+	char		**map;
+
+	player = so_long->player;
+	map = so_long->map->data;
+	so_long->collectibles--;
+	map[player.pos.y][player.pos.x] = '0';
+	so_long->score += 10;
 }
 
 void	movement_handler(t_so_long *so_long)
@@ -71,16 +83,4 @@ void	events_handler(t_so_long *so_long)
 		collect_score(so_long);
 	else if (event == 'E' && !so_long->collectibles)
 		game_win(so_long);
-}
-
-void	collect_score(t_so_long *so_long)
-{
-	t_entity	player;
-	char		**map;
-
-	player = so_long->player;
-	map = so_long->map->data;
-	so_long->collectibles--;
-	map[player.pos.y][player.pos.x] = '0';
-	so_long->score += 10;
 }

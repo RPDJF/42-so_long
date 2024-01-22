@@ -6,13 +6,13 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:27 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/22 00:39:54 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 04:41:33 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-int	key_press(int keycode, void *param)
+static int	key_press(int keycode, void *param)
 {
 	t_so_long	*so_long;
 
@@ -63,7 +63,7 @@ static t_so_long	*new_so_long(char *filename)
 	return (so_long);
 }
 
-int	ticks(void *arg)
+static int	ticks(void *arg)
 {
 	t_so_long	*so_long;
 

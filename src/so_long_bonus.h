@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 23:49:44 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 04:43:30 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,8 +138,6 @@ int			movement_handler(t_so_long *so_long, t_entity *entity);
 int			teleport_handler(t_so_long *so_long, t_entity *e);
 //		events_handler:		handles events
 void		events_handler(t_so_long *so_long);
-//		collect_score:	collectible event
-void		collect_score(t_so_long *so_long);
 
 //	FROM FILE utils_bonus/entities_bonus.c
 //		models of pre-existent entities
