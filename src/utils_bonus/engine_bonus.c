@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 18:49:51 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 23:39:12 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 03:45:42 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	movement_handler(t_so_long *so_long, t_entity *entity)
 	else if (pos->y < so_long->map->height - 1
 		&& direction == DOWN && map[pos->y + 1][pos->x] != '1')
 		pos->y++;
-	if (delta != pos->x + pos->y)
-		++so_long->moves;
+	if (entity == &so_long->player && delta != pos->x + pos->y)
+		so_long->moves++;
 	animate(entity, direction % entity->nb_anims);
 	return (0);
 }
