@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 22:06:30 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 18:48:10 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:40:47 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static char	**map_dup(t_so_long *so_long)
 
 static int	pathfinder(t_so_long *so_long, char **map, t_pos p1, t_pos p2)
 {
-	if (map[p1.y][p1.x] == '1' || p1.x < 0 || p1.y < 0
-		|| p1.x >= so_long->map->width || p1.y >= so_long->map->height)
+	if (p1.x < 0 || p1.y < 0 || p1.x >= so_long->map->width
+		|| p1.y >= so_long->map->height || map[p1.y][p1.x] == '1')
 		return (-1);
 	if ((p1.x + 1 == p2.x && p1.y == p2.y)
 		|| (p1.x - 1 == p2.x && p1.y == p2.y)

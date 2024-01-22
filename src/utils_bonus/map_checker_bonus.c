@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 00:11:01 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/22 00:41:08 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:16:46 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	map_format_checker(t_map *map)
 	while (h++, map->data && map->data[h])
 	{
 		i = -1;
-		while (i++, (map->data[h])[i])
+		while (i++, map->data[h][i])
 		{
 			trigger = false;
 			j = -1;
 			while (j++, MAP_FORMAT[j])
-				if ((map->data[h])[i] == MAP_FORMAT[j])
+				if (map->data[h][i] == MAP_FORMAT[j])
 					trigger = true;
 			if (!trigger)
 				return (-1);
