@@ -6,7 +6,7 @@
 /*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:09:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/21 18:59:13 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:50:51 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ t_map	*get_map(t_so_long *so_long, char *filename)
 	if (!map)
 		return (0);
 	map->data = load_map(filename);
+	if (!map->data)
+		crash_exit(so_long);
 	so_long->map = map;
 	status = map_checker(so_long, map);
 	if (status < 0)
