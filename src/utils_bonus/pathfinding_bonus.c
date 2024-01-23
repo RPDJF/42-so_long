@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 22:06:30 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/22 01:38:15 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/23 06:01:00 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ int	get_path(t_so_long *so_long, t_pos p1, t_pos p2)
 
 	map_cpy = map_dup(so_long);
 	status = pathfinder(so_long, map_cpy, p1, p2);
+	ft_memsuperclear((void **)map_cpy, so_long->map->height);
 	return (status);
 }
