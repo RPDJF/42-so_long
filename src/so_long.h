@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:41:57 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/22 04:45:53 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:56:03 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ int			render_all(void *param);
 //	FROM FILE utils/map_checker_utils.c
 
 //		check_map_name:	tests name of the map, exit on wrong filename
-void		check_map_name(char *filename);
+void		check_map_name(t_so_long *so_long, char *filename);
 
 //	FROM FILE utils/map_checker.c
 

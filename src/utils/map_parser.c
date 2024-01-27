@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/17 14:09:11 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/22 01:50:51 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/27 12:56:06 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_map	*get_map(t_so_long *so_long, char *filename)
 	t_map	*map;
 	int		status;
 
-	check_map_name(filename);
+	check_map_name(so_long, filename);
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (0);
