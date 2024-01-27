@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_handler_macos_bonus.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rude-jes <ruipaulo.unify@outlook.fr>       +#+  +:+       +#+        */
+/*   By: rude-jes <rude-jes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 00:52:28 by rude-jes          #+#    #+#             */
-/*   Updated: 2024/01/20 19:33:35 by rude-jes         ###   ########.fr       */
+/*   Updated: 2024/01/27 11:28:50 by rude-jes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	secure_exit(void *param)
 	if (param)
 	{
 		so_long = (t_so_long *)param;
-		if (so_long->win)
+		if (so_long->win || so_long->mlx)
 			mlx_destroy_window(so_long->mlx, so_long->win);
 	}
 	cleargarbage();
@@ -35,7 +35,7 @@ int	error_exit(void *param)
 	if (param)
 	{
 		so_long = (t_so_long *)param;
-		if (so_long->win)
+		if (so_long->win || so_long->mlx)
 			mlx_destroy_window(so_long->mlx, so_long->win);
 	}
 	cleargarbage();
@@ -51,7 +51,7 @@ int	crash_exit(void *param)
 	if (param)
 	{
 		so_long = (t_so_long *)param;
-		if (so_long->win)
+		if (so_long->win || so_long->mlx)
 			mlx_destroy_window(so_long->mlx, so_long->win);
 	}
 	cleargarbage();
