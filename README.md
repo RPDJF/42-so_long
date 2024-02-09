@@ -1,3 +1,6 @@
+![](https://raw.githubusercontent.com/RPDJF/42-Repos/main/cursus/so_long_score.png)
+![](https://github.com/ayogun/42-project-badges/blob/main/badges/so_longm.png?raw=true)
+
 ![](https://img.shields.io/github/languages/code-size/rpdjf/42-so_long?color=5BCFFF)
 
 ![](https://img.shields.io/badge/windows%20terminal-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white)
